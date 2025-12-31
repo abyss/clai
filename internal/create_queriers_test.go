@@ -65,6 +65,11 @@ func TestSelectTextQuerier_AllVendors(t *testing.T) {
 		env   map[string]string
 	}{
 		{
+			name:  "bedrock",
+			model: "bedrock:anthropic.claude-3-haiku-20240307-v1:0",
+			env:   map[string]string{"AWS_REGION": "us-east-1"},
+		},
+		{
 			name:  "anthropic",
 			model: "claude-3-opus",
 			env:   map[string]string{"ANTHROPIC_API_KEY": "k"},

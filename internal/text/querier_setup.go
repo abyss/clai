@@ -18,6 +18,16 @@ import (
 )
 
 func vendorType(fromModel string) (string, string, string, error) {
+	if strings.HasPrefix(fromModel, "bedrock") {
+		modelVersion := "default"
+		if strings.HasPrefix(fromModel, "bedrock:") {
+			modelVersion = strings.TrimPrefix(fromModel, "bedrock:")
+			if modelVersion == "" {
+				modelVersion = "default"
+			}
+		}
+		return "bedrock", "converse", modelVersion, nil
+	}
 	if strings.Contains(fromModel, "gpt") {
 		return "openai", "gpt", fromModel, nil
 	}

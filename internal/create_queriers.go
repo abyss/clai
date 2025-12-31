@@ -11,6 +11,7 @@ import (
 	"github.com/baalimago/clai/internal/photo"
 	"github.com/baalimago/clai/internal/text"
 	"github.com/baalimago/clai/internal/vendors/anthropic"
+	"github.com/baalimago/clai/internal/vendors/bedrock"
 	"github.com/baalimago/clai/internal/vendors/deepseek"
 	"github.com/baalimago/clai/internal/vendors/gemini"
 	"github.com/baalimago/clai/internal/vendors/inception"
@@ -27,6 +28,23 @@ import (
 func selectTextQuerier(ctx context.Context, conf text.Configurations) (models.Querier, bool, error) {
 	var q models.Querier
 	found := false
+
+	if strings.HasPrefix(conf.Model, "bedrock") {
+		found = true
+		defaultCpy := bedrock.Default
+		if strings.HasPrefix(conf.Model, "bedrock:") {
+			modelID := strings.TrimPrefix(conf.Model, "bedrock:")
+			if modelID != "" {
+				defaultCpy.Model = modelID
+			}
+		}
+		qTmp, err := text.NewQuerier(ctx, conf, &defaultCpy)
+		if err != nil {
+			return nil, found, fmt.Errorf("failed to create text querier: %w", err)
+		}
+		q = &qTmp
+		return q, found, nil
+	}
 
 	if strings.Contains(conf.Model, "claude") {
 		found = true

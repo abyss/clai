@@ -36,6 +36,7 @@ See [examples](./EXAMPLES.md) for additional info.
 | Inception | `INCEPTION_API_KEY`  | [Text models](https://platform.inceptionlabs.ai/docs#models)                                                                                                       |
 | xAi       | `XAI_API_KEY`        | [Text models](https://docs.x.ai/docs/models)                                                                                                                       |
 | Gemini    | `GEMINI_API_KEY`     | [Text models](https://ai.google.dev/gemini-api/docs/models), [photo models](https://ai.google.dev/gemini-api/docs/image-generation#image_generation_text-to-image) |
+| Bedrock   | AWS credentials      | [Text models](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html), use prefix `bedrock:`                                                   |
 
 ## Get started
 
